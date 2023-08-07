@@ -1,0 +1,85 @@
+<section class="p-3">
+  <form class="mx-auto mb-5 p-3 card" [formGroup]="productForm">
+    <div class="mb-3">
+      <label class="form-label" for="name">Name</label>
+      <input
+        class="form-control"
+        type="text"
+        id="name"
+        formControlName="name"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="category">Category</label>
+      <select class="form-select" id="category" formControlName="category">
+        <option *ngFor="let category of categoryList" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="price">Price</label>
+      <input
+        class="form-control"
+        type="number"
+        id="price"
+        formControlName="price"
+      />
+    </div>
+    <div class="form-actions d-flex justify-content-end">
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="productForm.invalid"
+        (click)="addProduct()"
+        *ngIf="!editProduct"
+      >
+        Add Product
+      </button>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="productForm.invalid"
+        (click)="updateProduct()"
+        *ngIf="editProduct"
+      >
+        Update Product
+      </button>
+      <button
+        class="btn btn-danger"
+        type="button"
+        (click)="onCancel()"
+        *ngIf="editProduct"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productList$ | async">
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.price | currency : "INR" }}</td>
+        <td class="buttons">
+          <button class="btn btn-warning" (click)="onEdit(product)">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+          <button class="btn btn-danger" (click)="deleteProduct(product.id!)">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

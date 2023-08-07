@@ -1,0 +1,8 @@
+<section>
+  <div class="counter-wrapper p-3 d-flex align-items-center">
+    <button class="btn btn-primary" (click)="decrement()">-</button>
+    <div>Count: {{ count$ | async }}</div>
+    <button class="btn btn-primary" (click)="increment()">+</button>
+    <button class="btn btn-danger" (click)="reset()">Reset</button>
+  </div>
+</section>

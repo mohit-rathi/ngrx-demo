@@ -1,0 +1,72 @@
+<section class="mx-auto p-3">
+  <form class="mb-5 p-3 card" [formGroup]="bookForm">
+    <div class="mb-3">
+      <label class="form-label" for="title">Title</label>
+      <input
+        class="form-control"
+        type="text"
+        id="title"
+        formControlName="title"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="description">Description</label>
+      <input
+        class="form-control"
+        type="text"
+        id="description"
+        formControlName="description"
+      />
+    </div>
+    <div class="form-actions d-flex justify-content-end">
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="bookForm.invalid"
+        (click)="addBook()"
+        *ngIf="!editBook"
+      >
+        Add Book
+      </button>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="bookForm.invalid"
+        (click)="updateBook()"
+        *ngIf="editBook"
+      >
+        Update Book
+      </button>
+      <button
+        class="btn btn-danger"
+        type="button"
+        (click)="onCancel()"
+        *ngIf="editBook"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+  <ul class="list-unstyled d-flex flex-column">
+    <li *ngFor="let book of bookList$ | async; index as i">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ book.title }}
+          </h5>
+          <p class="card-text">
+            {{ book.description }}
+          </p>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+          <button class="btn btn-sm btn-success" (click)="onEdit(i, book)">
+            Edit
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteBook(i)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</section>

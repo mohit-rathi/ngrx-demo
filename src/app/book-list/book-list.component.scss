@@ -1,0 +1,15 @@
+section {
+	max-width: 600px;
+
+	.form-actions {
+		gap: 1rem;
+	}
+
+	ul {
+		gap: 1rem;
+
+		.card-footer {
+			gap: .5rem;
+		}
+	}
+}
